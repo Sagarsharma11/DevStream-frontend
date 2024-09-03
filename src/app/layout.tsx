@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Youtube Go",
+  title: "Dev Stream",
   description: "Youtube Go is a coding videos app",
 };
 
