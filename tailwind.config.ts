@@ -8,6 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        // Custom colors mapped to your CSS variables
+        'main-theme': 'var(--main-theme)',
+        'primary-color': 'var(--primary-color)',
+        'secondary-color': 'var(--secondary-color)',
+        'title-color': 'var(--title-color)',
+        'neon-color': 'var(--neon-color)',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
