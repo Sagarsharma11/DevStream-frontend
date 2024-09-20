@@ -3,7 +3,7 @@ import styles from "./PrimaryLayout.module.css"
 
 const PrimaryLayout = ({children}:any) => {
   return (
-    <div className={`border ${styles["main--container"]}`}>{children}</div>
+    <div className={` ${styles["main--container"]}`}>{children}</div>
   )
 }
 
