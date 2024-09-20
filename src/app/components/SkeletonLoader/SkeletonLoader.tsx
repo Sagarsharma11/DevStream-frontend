@@ -6,7 +6,7 @@ const SkeletonLoader = ({ count }: { count: number }) => {
   const skeletons = Array.from({ length: count }, (_, i) => i);
 
   return (
-    <div className="flex flex-wrap gap-10 items-center justify-between w-full border">
+    <div className="flex flex-wrap gap-10 items-center justify-between w-full">
       {skeletons.map((_, index) => (
         <div
           key={index}

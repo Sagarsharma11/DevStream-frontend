@@ -1,0 +1,28 @@
+
+.main--container{
+      padding: 0.5rem 19rem;
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1600px) {
+    .main--container {
+        padding: 0.5rem 0rem;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .main--container {
+        padding: 0.5rem 2rem;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+    .main--container {
+        padding: 0.5rem 2rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .main--container {
+        padding: 0.5rem 0rem;
+    }
+}

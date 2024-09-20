@@ -36,7 +36,7 @@ const Player: React.FC<Props> = (props) => {
           <img
             src={thumbnailUrl ? thumbnailUrl : customThumbnail}
             alt={title}
-            className={styles["thumbnail"]}
+            className={` ${styles["thumbnail"]} object-cover w-full h-full`}
           />
           {/* Overlay to display on top of the image */}
           <div className={styles["overlay"]}>
