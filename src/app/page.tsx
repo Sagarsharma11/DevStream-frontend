@@ -2,19 +2,19 @@
 import Player from "./components/HomeComponents/Player/Player";
 import { useEffect, useState } from "react";
 import SkeletonLoader from "./components/SkeletonLoader/SkeletonLoader";
-import { uniqueRandomArray } from "@/utils/uniqueRandomArray";
+import localJsonData from "../utils/data/data.json";
+// import { uniqueRandomArray } from "@/utils/uniqueRandomArray";
 
 import styles from "./page.module.css"
 import PrimaryLayout from "@/utils/components/PrimaryLayout";
 
 export default function Home() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<any[]>(localJsonData);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(true); // Loading state
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(36);
   const [search, setSearch] = useState("")
   const [limit, setLimit] = useState(12)
-
 
 
   // Fetch data from API with the current offset
@@ -107,14 +107,15 @@ export default function Home() {
             <div className="h-4">
               {search && (
                 <p className="text-red-700 text-sm">
-                  We are working hard for your better experience
+               Search is Temporarily Unavailable
                 </p>
               )}
             </div>
           </div>
         </div>
 
-        <div className="flex min-h-screen flex-row items-center justify-center lg:justify-between px-6 md:px-12 lg:px-24 gap-4 md:gap-5 flex-wrap">
+         <div className="flex min-h-screen flex-row items-center justify-center lg:justify-between px-6 md:px-12 lg:px-24 gap-4 md:gap-5 flex-wrap">
+         
           {loading && offset === 0 ? (
             // Show skeleton loader while the first batch of data is being loaded
             <SkeletonLoader count={limit} />
@@ -144,7 +145,9 @@ export default function Home() {
             <div>No more items to load</div>
           )}
 
-          {loading && offset > 0 && (
+          {//loading && offset > 0
+          true
+          && (
             <SkeletonLoader count={3} />
           )}
         </div>
