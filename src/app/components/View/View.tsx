@@ -11,7 +11,7 @@ interface ViewProps {
 const View: React.FC<ViewProps> = ({ setView, view, data }) => {
     // console.log(data);
     return (
-        <div  className="relative z-10  h-[22rem] sm:h-full" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div onClick={() => setView(false)} className="relative z-10  h-[22rem] sm:h-full" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div className="border-red-600 h-[22rem] sm:h-full fixed inset-0 bg-main-theme bg-opacity-0 sm:bg-opacity-75 sm:bg-gray-500 transition-opacity" aria-hidden="true">
             </div>
 
