@@ -12,13 +12,14 @@ const View: React.FC<ViewProps> = ({ setView, view, data }) => {
     console.log(data);
     return (
         <div onClick={() => setView(false)} className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-0 sm:bg-opacity-75 sm:bg-gray-500 transition-opacity" aria-hidden="true"></div>
 
             <div className="fixed inset-0 z-10 w-full overflow-y-auto">
-                <div className="flex min-h-full items-start justify-center p-4 text-center sm:items-center sm:p-0">
+            <div className="flex min-h-full items-start justify-center p-0 text-center sm:items-center lg:p-0">
+
                     <div 
                         onClick={(e) => e.stopPropagation()} 
-                        className="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl w-full top-0" // Added top-0 and w-full
+                        className="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl w-full top-0"
                     >
                         <div className="bg-main-theme px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                             <div className="sm:flex flex-col sm:items-start">
