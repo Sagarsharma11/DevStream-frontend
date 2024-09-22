@@ -1,15 +1,14 @@
 
 
    .container-size {
-    /* height: 14rem; */
+    height: 22rem;
     width: 100%;
     border-radius: 0.5rem;
-    /* border: 2px solid red; */
-    position: relative; /* Allows absolute positioning of child elements */
+    position: relative; 
   }
   
   .image-container {
-    position: relative; /* Container for the image and overlay */
+    position: relative; 
     height: 100%;
     width: 100%;
     border-radius: 0.5rem;
@@ -57,3 +56,26 @@
     opacity: 1; /* Show overlay on hover */
   }
   
+
+  @media only screen and (min-width: 769px) and (max-width: 1200px) {
+    .container-size {
+      height: 22rem;
+    }
+    
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+
+  .container-size {
+    height: 22rem;
+  }
+  
+}
+
+@media only screen and (max-width: 480px) {
+
+  .container-size {
+    height: 12rem;
+  }
+  
+}

@@ -9,13 +9,13 @@ type Props = {
     title: string;
     thumbnailUrl?: string;
   };
-  play: boolean;
-  index: number
+  // play: boolean;
+  // index: number
 };
 
 const Player: React.FC<Props> = (props) => {
   const { url, title, thumbnailUrl } = props.data;
-  const play = props.play;
+  const play = true/// props.play;
 
   const random = Math.floor(Math.random() * 4) + 1; 
   const customThumbnail = `image/${random}.jpg`;

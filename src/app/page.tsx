@@ -7,6 +7,7 @@ import localJsonData from "../utils/data/data.json";
 
 import styles from "./page.module.css"
 import PrimaryLayout from "@/utils/components/PrimaryLayout";
+import View from "./components/View/View"
 
 export default function Home() {
   const [data, setData] = useState<any[]>(localJsonData);
@@ -15,7 +16,8 @@ export default function Home() {
   const [offset, setOffset] = useState(36);
   const [search, setSearch] = useState("")
   const [limit, setLimit] = useState(12)
-
+  const [view, setView] = useState(false)
+  const [viewData, setViewData] = useState({})
 
   // Fetch data from API with the current offset
   const fetchData = async (currentOffset: number) => {
@@ -64,7 +66,7 @@ export default function Home() {
   useEffect(() => {
     if (hasMore) {
       // const debounceTimeout = setTimeout(() => {
-        fetchData(offset);
+      fetchData(offset);
       // }, 1000);
 
       // Cleanup function to clear timeout if dependencies change
@@ -87,10 +89,19 @@ export default function Home() {
     setCurrentPlaying(index);
   };
 
+  const random = Math.floor(Math.random() * 4) + 1;
+  const customThumbnail = `image/${random}.jpg`;
+
   return (
     <PrimaryLayout>
+      {view ? <View
+        setView={setView}
+        view={view}
+        data={viewData}
+      /> : ""}
       <main className="flex flex-col gap-10">
         <div className="flex flex-col md:flex-row px-6 md:px-12 lg:px-24 py-5 gap-4 md:gap-10 w-full justify-between">
+
           <p className="text-neon-color text-lg md:text-xl lg:text-2xl">
             Dev Stream
           </p>
@@ -107,27 +118,46 @@ export default function Home() {
             <div className="h-4">
               {search && (
                 <p className="text-red-700 text-sm">
-               Search is Temporarily Unavailable
+                  Search is Temporarily Unavailable
                 </p>
               )}
             </div>
           </div>
         </div>
 
-         <div className="flex min-h-screen flex-row items-center justify-center lg:justify-between px-6 md:px-12 lg:px-24 gap-4 md:gap-5 flex-wrap">
-         
+        <div className="flex min-h-screen flex-row items-center justify-center lg:justify-between px-6 md:px-12 lg:px-24 gap-4 md:gap-5 flex-wrap">
+
           {loading && offset === 0 ? (
             // Show skeleton loader while the first batch of data is being loaded
             <SkeletonLoader count={limit} />
           ) : data.length > 0 ? (
             data.map((ele, index) => (
               <div
-                onClick={() => handlePlay(index)}
+                onClick={() => { handlePlay(index); setView(!view); setViewData(ele) }}
                 onMouseLeave={() => setCurrentPlaying(null)}
                 key={index}
+
                 className={`${styles["video-card"]} flex flex-col gap-5 p-2 shadow justify-center border-primary-color border rounded md:w-1/2 lg:w-1/3`}
               >
-                <Player play={currentPlaying === index} data={ele} index={index} />
+                <div className="relative w-full h-full group">
+                  <img
+                    src={ele.thumbnailUrl ? ele.thumbnailUrl : customThumbnail}
+                    alt={ele.title}
+                    className={` ${styles["thumbnail"]} object-cover w-full h-full`}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-12 w-12 bg-black rounded-full text-white transform transition-transform duration-300 ease-in-out group-hover:scale-125 group-hover:opacity-100 opacity-0"
+                      viewBox="0 0 24 24"
+                      fill="white"
+                    >
+                      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 14V8l6 4-6 4z" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* <Player play={currentPlaying === index} data={ele} index={index} /> */}
                 <div className="w-full h-16 text-neon-color">
                   {ele?.title}
                 </div>
@@ -146,10 +176,10 @@ export default function Home() {
           )}
 
           {//loading && offset > 0
-          true
-          && (
-            <SkeletonLoader count={3} />
-          )}
+            true
+            && (
+              <SkeletonLoader count={3} />
+            )}
         </div>
       </main>
     </PrimaryLayout>
