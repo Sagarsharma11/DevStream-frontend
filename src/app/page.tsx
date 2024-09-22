@@ -94,12 +94,12 @@ export default function Home() {
 
   return (
     <PrimaryLayout>
+      <main className="flex flex-col gap-10">
       {view ? <View
         setView={setView}
         view={view}
         data={viewData}
       /> : ""}
-      <main className="flex flex-col gap-10">
         <div className="flex flex-col md:flex-row px-6 md:px-12 lg:px-24 py-5 gap-4 md:gap-10 w-full justify-between">
 
           <p className="text-neon-color text-lg md:text-xl lg:text-2xl">
@@ -124,19 +124,16 @@ export default function Home() {
             </div>
           </div>
         </div>
-
         <div className="flex min-h-screen flex-row items-center justify-center lg:justify-between px-6 md:px-12 lg:px-24 gap-4 md:gap-5 flex-wrap">
-
           {loading && offset === 0 ? (
             // Show skeleton loader while the first batch of data is being loaded
             <SkeletonLoader count={limit} />
           ) : data.length > 0 ? (
             data.map((ele, index) => (
               <div
-                onClick={() => { handlePlay(index); setView(!view); setViewData(ele) }}
+                onClick={() => { handlePlay(index); setView(true); setViewData(ele) }}
                 onMouseLeave={() => setCurrentPlaying(null)}
                 key={index}
-
                 className={`${styles["video-card"]} flex flex-col gap-5 p-2 shadow justify-center border-primary-color border rounded md:w-1/2 lg:w-1/3`}
               >
                 <div className="relative w-full h-full group">

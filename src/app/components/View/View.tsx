@@ -9,12 +9,13 @@ interface ViewProps {
 }
 
 const View: React.FC<ViewProps> = ({ setView, view, data }) => {
-    console.log(data);
+    // console.log(data);
     return (
-        <div onClick={() => setView(false)} className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-0 sm:bg-opacity-75 sm:bg-gray-500 transition-opacity" aria-hidden="true"></div>
+        <div  className="relative z-10  h-[22rem] sm:h-full" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div className="border-red-600 h-[22rem] sm:h-full fixed inset-0 bg-main-theme bg-opacity-0 sm:bg-opacity-75 sm:bg-gray-500 transition-opacity" aria-hidden="true">
+            </div>
 
-            <div className="fixed inset-0 z-10 w-full overflow-y-auto">
+            <div className=" fixed inset-0 z-10 w-full overflow-y-auto  h-[22rem] sm:h-full">
             <div className="flex min-h-full items-start justify-center p-0 text-center sm:items-center lg:p-0">
 
                     <div 
