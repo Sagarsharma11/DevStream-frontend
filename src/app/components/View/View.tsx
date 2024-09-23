@@ -12,7 +12,7 @@ const View: React.FC<ViewProps> = ({ setView, view, data }) => {
     // console.log(data);
     return (
         <div onClick={() => setView(false)} className="relative z-10  h-[22rem] sm:h-full" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <div className="border-red-600 h-[22rem] sm:h-full fixed inset-0 bg-main-theme bg-opacity-0 sm:bg-opacity-75 sm:bg-gray-500 transition-opacity" aria-hidden="true">
+            <div className="shadow-sm shadow-white rounded h-[22rem] sm:h-full fixed inset-0 bg-main-theme bg-opacity-0 sm:bg-opacity-75 sm:bg-gray-500 transition-opacity" aria-hidden="true">
             </div>
 
             <div className=" fixed inset-0 z-10 w-full overflow-y-auto  h-[22rem] sm:h-full">
@@ -36,7 +36,7 @@ const View: React.FC<ViewProps> = ({ setView, view, data }) => {
                                 type="button" 
                                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                             >
-                                Cancel
+                                Close the stream window
                             </button>
                         </div>
                     </div>

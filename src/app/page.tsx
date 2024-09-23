@@ -13,7 +13,7 @@ export default function Home() {
   const [data, setData] = useState<any[]>(localJsonData);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(true); // Loading state
-  const [offset, setOffset] = useState(36);
+  const [offset, setOffset] = useState(72);
   const [search, setSearch] = useState("")
   const [limit, setLimit] = useState(12)
   const [view, setView] = useState(false)
@@ -124,7 +124,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex min-h-screen flex-row items-center justify-center lg:justify-between px-6 md:px-12 lg:px-24 gap-4 md:gap-5 flex-wrap">
+        <div className="flex min-h-screen flex-row items-center justify-center lg:justify-between px-0 sm:px-6 md:px-12 lg:px-24 gap-4 md:gap-5 flex-wrap">
           {loading && offset === 0 ? (
             // Show skeleton loader while the first batch of data is being loaded
             <SkeletonLoader count={limit} />
@@ -134,7 +134,7 @@ export default function Home() {
                 onClick={() => { handlePlay(index); setView(true); setViewData(ele) }}
                 onMouseLeave={() => setCurrentPlaying(null)}
                 key={index}
-                className={`${styles["video-card"]} flex flex-col gap-5 p-2 shadow justify-center border-primary-color border rounded md:w-1/2 lg:w-1/3`}
+                className={`${styles["video-card"]} flex flex-col gap-5 p-0 sm:p-2 shadow justify-center border-primary-color border rounded md:w-1/2 lg:w-1/3`}
               >
                 <div className="relative w-full h-full group">
                   <img
