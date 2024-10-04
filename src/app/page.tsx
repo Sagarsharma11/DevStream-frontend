@@ -15,40 +15,63 @@ export default function Home() {
   const [loading, setLoading] = useState(true); // Loading state
   const [offset, setOffset] = useState(72);
   const [search, setSearch] = useState("")
+  
+  const [total, setTotal] = useState(0);
+const [error, setError] = useState("");
   const [limit, setLimit] = useState(12)
   const [view, setView] = useState(false)
   const [viewData, setViewData] = useState({})
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  const handleChange = (e: any) => {
+    const value = e.target.value;
+    setSearch(value);   
+    if (value) { 
+      setOffset(0); 
+      setLimit(12); 
+      setError("");
+      setData([]); 
+    } else {
+      setData(localJsonData); 
+    }
+  };
+
   // Fetch data from API with the current offset
   const fetchData = async (currentOffset: number) => {
-    setLoading(true); // Start loading
+    setLoading(true);
     try {
       const response = await fetch(
-        `https://devstream-backend.onrender.com/api/v1/videos/get-all-data?limit=${limit}&offset=${currentOffset}`
+        // `http://localhost:8000/api/v1/videos/get-latest-result??limit=${limit}&offset=${currentOffset}&search=${search}`,
+        `https://devstream-backend.onrender.com/api/v1/videos/get-latest-result?limit=${limit}&offset=${currentOffset}&search=${search}`
+        // `https://devstream-backend.onrender.com/api/v1/videos/get-all-data?limit=${limit}&offset=${currentOffset}`
         // `http://localhost:8000/api/v1/videos/get-all-data?limit=${limit}&offset=${currentOffset}&search=${search}`
       );
       const result = await response.json();
-
+      if(result.statusCode > 201) {
+        setError(result.message)
+      }
       if (result.data.length > 0) {
+        setTotal(result.len)
         setData([...data, ...result.data]);
-        // if(search){
-        //   const dataArray = uniqueRandomArray(result.data)
-        //   setData(dataArray); // Append new data to existing data
-        // }else{
-        //   const dataArray = uniqueRandomArray([...data, ...result.data])
-        //   setData(dataArray); 
-        // }
-
       } else {
         setHasMore(false); // No more data to load
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setLoading(false); // End loading
+      setLoading(false); 
     }
   };
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 480px)");
+    const handleScreenChange = (e:any) => setIsMobile(e.matches);
+    handleScreenChange(mediaQuery); // Set initially
+    mediaQuery.addEventListener("change", handleScreenChange);
+
+    return () => mediaQuery.removeEventListener("change", handleScreenChange);
+  }, []);
 
 
   // Infinite scroll detection
@@ -65,14 +88,14 @@ export default function Home() {
 
   useEffect(() => {
     if (hasMore) {
-      // const debounceTimeout = setTimeout(() => {
+       const debounceTimeout = setTimeout(() => {
       fetchData(offset);
-      // }, 1000);
+      }, 1000);
 
       // Cleanup function to clear timeout if dependencies change
-      // return () => clearTimeout(debounceTimeout);
+      return () => clearTimeout(debounceTimeout);
     }
-  }, [offset, hasMore]);
+  }, [offset, hasMore, search]);
 
   // Handle scroll event
   useEffect(() => {
@@ -108,25 +131,22 @@ export default function Home() {
           <div className="flex flex-col w-full md:w-60 gap-2 md:gap-4">
             <input
               onChange={(e) => {
-                setSearch(e.target.value);
-                setLimit(10);
+                handleChange(e);
               }}
               className="border border-neon-color bg-primary-color rounded-sm text-neon-color px-2 py-1"
               placeholder="Search by keywords"
               type="text"
             />
             <div className="h-4">
-              {search && (
-                <p className="text-red-700 text-sm">
-                  Search is Temporarily Unavailable
-                </p>
-              )}
+              {
+                search?
+                <p className="text-white text-sm">Search results: <span>{total}</span></p>:""
+              }
             </div>
           </div>
         </div>
         <div className="flex min-h-screen flex-row items-center justify-center lg:justify-between px-0 sm:px-6 md:px-12 lg:px-24 gap-4 md:gap-5 flex-wrap">
           {loading && offset === 0 ? (
-            // Show skeleton loader while the first batch of data is being loaded
             <SkeletonLoader count={limit} />
           ) : data.length > 0 ? (
             data.map((ele, index) => (
@@ -153,8 +173,6 @@ export default function Home() {
                     </svg>
                   </div>
                 </div>
-
-                {/* <Player play={currentPlaying === index} data={ele} index={index} /> */}
                 <div className="w-full h-16 text-neon-color">
                   {ele?.title}
                 </div>
@@ -171,12 +189,11 @@ export default function Home() {
           ) : (
             <div>No more items to load</div>
           )}
-
-          {//loading && offset > 0
-            true
-            && (
-              <SkeletonLoader count={3} />
+          { (total<=data?.length || error)
+            ?<p className="text-neon-color">No Data Found!</p>: (
+              <SkeletonLoader count={isMobile?1:data.length === 0? 6: 3} />
             )}
+          {/* {<p className="text-white">{error}</p>} */}
         </div>
       </main>
     </PrimaryLayout>
