@@ -1,0 +1,65 @@
+
+  .loginCalc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+  }
+  .loginCalc input {
+    height: 2.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.8rem;
+    padding: 8px;
+    outline: none;
+    width: 80%;
+  }
+
+  .footerButton{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.footerButton button{
+    width: 70%;
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .signupCalc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+  }
+  .signupCalc input {
+    height: 2.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.8rem;
+    padding: 8px;
+    outline: none;
+    width: 80%;
+  }
+
+  .footerButton{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.footerButton button{
+    width: 70%;
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
